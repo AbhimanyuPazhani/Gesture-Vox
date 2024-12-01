@@ -1,0 +1,150 @@
+CODE USING EMBEDED C 
+
+
+#include <TMRpcm.h>
+#include <pcmConfig.h>
+#include <pcmRF.h>
+#include <SPI.h>
+#include <SD.h>
+TMRpcm tmrpcm;
+// Pin connected to the output of the flex sensor
+void setup() {  tmrpcm.speakerPin = 9;
+  Serial.begin(9600);  // Correct baud rate is 9600, not 9690
+  if (!SD.begin(10)) {
+    Serial.println("SD initialization failed!");
+    return;
+  }
+  Serial.println("SD card initialized successfully");
+  
+  // Set volume
+  tmrpcm.setVolume(5);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Read the flex sensor output
+  int sensorValue1 = analogRead(A0);
+  int sensorValue2 = analogRead(A1);
+  int sensorValue3 = analogRead(A2);
+  int sensorValue4 = analogRead(A3);
+  int sensorValue5 = analogRead(A4);
+  bool digitalvalue1 = sensorValue1<12? false:true;
+  bool digitalvalue2 = sensorValue2<12? false:true;
+  bool digitalvalue3 = sensorValue3<12? false:true;
+  bool digitalvalue4 = sensorValue3<12? false:true;
+  bool digitalvalue5 = sensorValue3<12? false:true;
+  Serial.print("Sensor Values: ");
+  Serial.print(sensorValue1); Serial.print(", ");
+  Serial.print(sensorValue2); Serial.print(", ");
+  Serial.print(sensorValue3); Serial.print(", ");
+  Serial.print(sensorValue4); Serial.print(", ");
+  Serial.println(sensorValue5);
+  
+  if(digitalvalue1==false&&digitalvalue2==false&&digitalvalue3==false&&digitalvalue4==false&&digitalvalue5==false){
+      Serial.println("what is the time");
+      Serial.flush();
+      tmrpcm.play("time.wav");
+      }
+  else if(digitalvalue1==false&&digitalvalue2==false&&digitalvalue3==false&&digitalvalue4==false&&digitalvalue5==true){
+      Serial.println("Have a good day");
+      tmrpcm.play("goodDay.wav");
+      }
+  else if(digitalvalue1==false&&digitalvalue2==false&&digitalvalue3==false&&digitalvalue4==true&&digitalvalue5==false){
+      Serial.println("good job");
+      tmrpcm.play("goodJob.wav");
+      }
+  else if(digitalvalue1==false&&digitalvalue2==false&&digitalvalue3==false&&digitalvalue4==true&&digitalvalue5==true){
+      Serial.println("good morning");
+      tmrpcm.play("goodMorning.wav");
+      }
+  else if(digitalvalue1==false&&digitalvalue2==false&&digitalvalue3==true&&digitalvalue4==false&&digitalvalue5==false){
+      Serial.println("hi, how are you");
+      tmrpcm.play("hi.wav");
+      }
+   else if(digitalvalue1==false&&digitalvalue2==false&&digitalvalue3==true&&digitalvalue4==false&&digitalvalue5==true){
+      Serial.println("nice to meet you ");
+      tmrpcm.play("niceToMeetYou.wav");
+      }
+   else if(digitalvalue1==false&&digitalvalue2==false&&digitalvalue3==true&&digitalvalue4==true&&digitalvalue5==false){
+      Serial.println("see you again");
+      tmrpcm.play("seeYouAgain.wav");
+      }
+   else if(digitalvalue1==false&&digitalvalue2==false&&digitalvalue3==true&&digitalvalue4==true&&digitalvalue5==true){
+      Serial.println("thank you very much");
+      tmrpcm.play("thanks.wav");
+      }
+   else if(digitalvalue1==false&&digitalvalue2==true&&digitalvalue3==false&&digitalvalue4==false&&digitalvalue5==false){
+      Serial.println("go to washroom ");
+      tmrpcm.play("washRoom.wav");
+      }
+   else if(digitalvalue1==false&&digitalvalue2==true&&digitalvalue3==false&&digitalvalue4==false&&digitalvalue5==true){
+      Serial.println("need water ");
+      }
+   else if(digitalvalue1==false&&digitalvalue2==true&&digitalvalue3==false&&digitalvalue4==true&&digitalvalue5==false){
+      Serial.println("need food ");
+      }
+   else if(digitalvalue1==false&&digitalvalue2==true&&digitalvalue3==false&&digitalvalue4==false&&digitalvalue5==true){
+      Serial.println("enough food ");
+      }
+   else if(digitalvalue1==false&&digitalvalue2==true&&digitalvalue3==true&&digitalvalue4==false&&digitalvalue5==false){
+      Serial.println("come here ");
+      }
+   else if(digitalvalue1==false&&digitalvalue2==true&&digitalvalue3==true&&digitalvalue4==false&&digitalvalue5==true){
+      Serial.println("i need to go out ");
+      }
+   else if(digitalvalue1==false&&digitalvalue2==true&&digitalvalue3==true&&digitalvalue4==true&&digitalvalue5==false){
+      Serial.println("i need bath ");
+      }
+   else if(digitalvalue1==false&&digitalvalue2==true&&digitalvalue3==true&&digitalvalue4==true&&digitalvalue5==true){
+      Serial.println("go to bed ");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==false&&digitalvalue3==false&&digitalvalue4==false&&digitalvalue5==false){
+      Serial.println(" help to cross signal ");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==false&&digitalvalue3==false&&digitalvalue4==false&&digitalvalue5==true){
+      Serial.println("stop ");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==false&&digitalvalue3==true&&digitalvalue4==true&&digitalvalue5==false){
+      Serial.println("great applause ");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==false&&digitalvalue3==false&&digitalvalue4==true&&digitalvalue5==true){
+      Serial.println("good work ");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==false&&digitalvalue3==true&&digitalvalue4==false&&digitalvalue5==false){
+      Serial.println("attend the phone ");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==false&&digitalvalue3==true&&digitalvalue4==false&&digitalvalue5==true){
+      Serial.println("oped the door ");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==false&&digitalvalue3==true&&digitalvalue4==true&&digitalvalue5==false){
+      Serial.println("switch ON the light ");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==false&&digitalvalue3==true&&digitalvalue4==true&&digitalvalue5==true){
+      Serial.println("switch ON the fan");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==true&&digitalvalue3==false&&digitalvalue4==false&&digitalvalue5==false){
+      Serial.println("switch OFF the fan ");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==true&&digitalvalue3==false&&digitalvalue4==false&&digitalvalue5==true){
+      Serial.println("go for walking ");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==true&&digitalvalue3==false&&digitalvalue4==true&&digitalvalue5==false){
+      Serial.println(" need my wheel chair");
+      }
+   else if(digitalvalue1==true&&digitalvalue2==true&&digitalvalue3==false&&digitalvalue4==true&&digitalvalue5==true){
+      Serial.println(" switch OFF the light");
+      }
+  else if(digitalvalue1==true&&digitalvalue2==true&&digitalvalue3==true&&digitalvalue4==false&&digitalvalue5==false){
+      Serial.println("i am happy ");
+      }
+  else if(digitalvalue1==true&&digitalvalue2==true&&digitalvalue3==true&&digitalvalue4==false&&digitalvalue5==true){
+      Serial.println("dislike ");
+      }
+  else if(digitalvalue1==true&&digitalvalue2==true&&digitalvalue3==true&&digitalvalue4==true&&digitalvalue5==false){
+      Serial.println("keep rocking");
+      }
+  else if(digitalvalue1==true&&digitalvalue2==true&&digitalvalue3==true&&digitalvalue4==true&&digitalvalue5==true){
+      Serial.println("stop ");
+      }                                                                                                                                
+  delay(3000);
+}
